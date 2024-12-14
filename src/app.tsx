@@ -41,8 +41,8 @@ export function App() {
         <div class="field">
           <label for="start">What day were you born?</label>
           <input
-            type="date"
             name="start"
+            type="date"
             max={MAX_DATE}
             defaultValue={date}
             onChange={handleOnChange(setDate)}
@@ -51,8 +51,9 @@ export function App() {
         <div class="field">
           <label for="lifespan">How long do you expect to live?</label>
           <input
-            type="number"
             name="lifespan"
+            type="number"
+            inputmode="numeric"
             min="0"
             max="120"
             defaultValue={lifespan}
