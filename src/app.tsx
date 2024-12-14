@@ -1,32 +1,31 @@
 import type { TargetedEvent } from "preact/compat";
-import { useMemo, type Dispatch, type StateUpdater } from "preact/hooks";
-import { useSessionStorage } from "./hooks/useSessionStorage";
+
+import {
+  useQueryParam,
+  type UseQueryParamDispatch,
+} from "./hooks/useQueryParam";
 
 import "./app.css";
 
 const MAX_DATE = new Date().toISOString().split("T")[0];
 
 export function App() {
-  const [date, setDate] = useSessionStorage("date", MAX_DATE);
-  const [lifespan, setLifespan] = useSessionStorage("lifespan", "80");
+  const [date, setDate] = useQueryParam("date", MAX_DATE);
+  const [lifespan, setLifespan] = useQueryParam("lifespan", "80");
   const totalWeeks = Number(lifespan) * 52;
   const weeksLived = Math.floor(
     (Date.now() - new Date(date).getTime()) / 1000 / 60 / 60 / 24 / 7,
   );
 
-  function handleOnChange(updater: Dispatch<StateUpdater<string>>) {
+  function handleOnChange(updater: UseQueryParamDispatch) {
     return (event: TargetedEvent<HTMLInputElement>) => {
       updater(event.currentTarget.value);
     };
   }
 
-  const weeks = useMemo(
-    () =>
-      Array.from({ length: totalWeeks }, (_, i) => i).map((i) => (
-        <div key={i} class={`week ${i < weeksLived ? "lived" : ""}`} />
-      )),
-    [totalWeeks, weeksLived],
-  );
+  const weeks = Array.from({ length: totalWeeks }, (_, i) => i).map((i) => (
+    <div key={i} class={`week ${i < weeksLived ? "lived" : ""}`} />
+  ));
 
   return (
     <main>

@@ -1,5 +1,8 @@
 import { useState } from "preact/hooks";
 
+// NOTE: We use to use this in place of the useQueryParam hook
+
+// Custom hook to manage state with sessionStorage
 export function useSessionStorage<T>(key: string, initial: T) {
   const [value, setValue] = useState(() => {
     if (typeof window !== "undefined") {
