@@ -4,6 +4,7 @@ import {
   useQueryParam,
   type UseQueryParamDispatch,
 } from "./hooks/useQueryParam";
+import { DynamicMetaImage } from "./meta";
 
 import "./app.css";
 
@@ -27,8 +28,15 @@ export function App() {
     <div key={i} class={`week ${i < weeksLived ? "lived" : ""}`} />
   ));
 
+  const ogImageUrl = `https://ftw-og-generator.ale-trail.workers.dev/?date=${date}&lifespan=${lifespan}`;
+
   return (
     <main>
+      <DynamicMetaImage
+        title="Four Thousand Weeks"
+        description={`I have about ${weeksLived - totalWeeks} remaining.`}
+        imageUrl={ogImageUrl}
+      />
       <section>
         <h1>Four Thousand Weeks</h1>
         <p>

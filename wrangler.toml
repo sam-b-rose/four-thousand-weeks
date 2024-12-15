@@ -1,0 +1,3 @@
+name = "ftw-og-generator"
+main = "og-image.js"
+compatibility_date = "2024-01-01"
