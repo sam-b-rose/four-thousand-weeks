@@ -1,3 +1,4 @@
+import { useState } from "preact/hooks";
 import type { TargetedEvent } from "preact/compat";
 
 import {
@@ -10,6 +11,7 @@ import "./app.css";
 const MAX_DATE = new Date().toISOString().split("T")[0];
 
 export function App() {
+  const [copied, setCopied] = useState(false);
   const [date, setDate] = useQueryParam("date", MAX_DATE);
   const [lifespan, setLifespan] = useQueryParam("lifespan", "80");
   const totalWeeks = Number(lifespan) * 52;
@@ -62,6 +64,19 @@ export function App() {
         </div>
         <div class="grid">{weeks}</div>
       </section>
+      <footer>
+        <button
+          onClick={() => {
+            setCopied(true);
+            navigator.clipboard.writeText(window.location.href);
+            setTimeout(() => {
+              setCopied(false);
+            }, 1000);
+          }}
+        >
+          {copied ? "Copied!" : "Copy share link"}
+        </button>
+      </footer>
     </main>
   );
 }
