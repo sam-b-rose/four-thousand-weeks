@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "preact": "^10.25.0",
     "preact-helmet": "4.0.0-alpha-3"
   },
